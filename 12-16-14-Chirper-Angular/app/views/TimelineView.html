@@ -1,0 +1,22 @@
+﻿
+    <table class="table table-bordered" ng-controller="FriendsController">
+        <tr>
+            <th>User</th>
+            <th>Tweet</th>
+            <th>Timestamp</th>
+        </tr>
+        <tr ng-repeat="tweet in timelineTweets">
+            <td>{{tweet.user}}</td>
+            <td>{{tweet.message}}</td>
+            <td>{{tweet.timestamp | date:'medium'}}</td>
+        </tr>
+    </table>
+<div>
+    <table class="table">
+        <tr>
+            <td><input type="button" value="Show Fewer Tweets!" ng-click="showFewerTweets()" /></td>
+            <td><input type="button" value="Show All Tweeets!" ng-click="showAllTweets()" /></td>
+        </tr>
+    </table>
+</div>
+

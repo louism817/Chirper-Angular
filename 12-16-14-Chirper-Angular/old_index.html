@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="chirperApp">
+<head>
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <a href="#/timeline">See Timeline</a>
+    </div>
+    <div ng-view="">
+
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-4 column">
+
+                <div class="info" ng-controller="LocalUserController">
+                    <div>
+                        <img src="{{user.photo}}" />
+                        <p>Name: {{user.name}}</p>
+                        <p>Location: {{user.location}}</p>
+                    </div>
+
+                    <a id="modal-15545" href="#modal-container-15545" role="button" class="btn" data-toggle="modal">Edit User Info</a>
+                    <div class="modal fade" id="modal-container-15545" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Update User Info
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <p>Name: <input type="text" ng-model="name" /></p>
+                                        <p>Location: <input type="text" ng-model="location" /></p>
+                                        <p>Photo: <input type="text" ng-model="photo" /></p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" ng-click="updateUser();" data-dismiss="modal">Save changes</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-md-8 column">
+
+                <div class="tabbable" id="tabs-475201">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#panel-218146" data-toggle="tab">My Tweets</a>
+                        </li>
+                        <li>
+                            <a href="#panel-198302" data-toggle="tab">Timeline</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="panel-218146" ng-controller="LocalUserController">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Tweet</th>
+                                    <th>Timestamp</th>
+                                    <th>Delete</th>
+                                </tr>
+                                <tr ng-repeat="tweet in userTweets">
+                                    <td>{{tweet.message}}</td>
+                                    <td>{{tweet.timestamp | date:'medium'}}</td>
+                                    <td><input type="button" value="Delete Tweet" ng-click="deleteTweet(tweet)"></td>
+                                </tr>
+                            </table>
+                            <div>
+                                <table class="table">
+                                    <tr>
+                                        <td><input type="button" value="Show Fewer Tweets!" ng-click="showFewerTweets()" /></td>
+                                        <td>
+                                            <input type="text" class="input" placeholder="Enter new tweet!" ng-model="tweetText" /><br />
+                                            <input type="button" value="Submit Tweet" ng-click="addTweet()" />
+                                        </td>
+                                        <td><input type="button" value="Show All Tweeets!" ng-click="showAllTweets()" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel-198302" ng-controller="FriendsController">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>User</th>
+                                    <th>Tweet</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                                <tr ng-repeat="tweet in timelineTweets">
+                                    <td>{{tweet.user}}</td>
+                                    <td>{{tweet.message}}</td>
+                                    <td>{{tweet.timestamp | date:'medium'}}</td>
+                                </tr>
+                            </table>
+                            <div>
+                                <table class="table">
+                                    <tr>
+                                        <td><input type="button" value="Show Fewer Tweets!" ng-click="showFewerTweets()" /></td>
+                                        <td><input type="button" value="Show All Tweeets!" ng-click="showAllTweets()" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/TimelineController.js"></script>
+    <script src="app/services/TimelineService.js"></script>
+    <script src="app/controllers/MyTweetsController.js"></script>
+    <script src="app/services/MyTweetsService.js"></script>
+    <script src="app/controllers/LocalUserController.js"></script>
+    <script src="app/services/LocalUserService.js"></script>
+    <script src="app/controllers/FriendsController.js"></script>
+    <script src="app/services/FriendsService.js"></script>
+</body>
+</html>
